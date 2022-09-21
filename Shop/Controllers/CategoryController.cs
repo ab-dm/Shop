@@ -29,5 +29,18 @@ namespace Shop.Controllers
         {
             return View();
         }
+
+        // POST - Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Category obj)
+        {
+            // adding to database
+            _db.Category.Add(obj);
+            // required method
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
     }
 }
