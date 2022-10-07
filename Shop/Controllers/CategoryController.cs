@@ -43,7 +43,7 @@ namespace Shop.Controllers
         // GET - EDIT
         public IActionResult Edit(int? id)
         {
-            if (id == 0 || id == 0)
+            if (id == null || id == 0)
             {
                 return NotFound();
             }

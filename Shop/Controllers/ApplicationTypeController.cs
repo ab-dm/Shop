@@ -27,7 +27,7 @@ namespace Shop.Controllers
             return View();
         }
 
-        // POST - Create
+        // POST - CREATE
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(ApplicationType obj)
@@ -37,6 +37,73 @@ namespace Shop.Controllers
             // required method
             _db.SaveChanges();
 
+            return RedirectToAction("Index");
+        }
+
+        // GET - EDIT
+        public IActionResult Edit(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            var obj = _db.ApplicationType.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
+        }
+
+        // POST - EDIT
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(ApplicationType obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.ApplicationType.Update(obj);
+                _db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(obj);
+        }
+
+        // GET - DELETE
+        public IActionResult Delete(int? id)
+        {
+            if (id == 0 || id == 0)
+            {
+                return NotFound();
+            }
+
+            var obj = _db.ApplicationType.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
+        }
+
+        // POST - DELETE
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePost(int? id)
+        {
+            var obj = _db.ApplicationType.Find(id);
+
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            _db.ApplicationType.Remove(obj);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
     }
