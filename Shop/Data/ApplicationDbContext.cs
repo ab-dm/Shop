@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
 using Shop.Models;
 
 namespace Shop.Data
@@ -8,7 +7,6 @@ namespace Shop.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-
         }
 
         public DbSet<Category> Category { get; set; }

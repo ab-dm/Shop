@@ -50,6 +50,33 @@ namespace Shop.Migrations
 
                     b.ToTable("Category");
                 });
+
+            modelBuilder.Entity("Shop.Models.DanceTeam", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Father")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Mather")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PhoneNumberFather")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PhoneNumberMather")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DanceTeam");
+                });
 #pragma warning restore 612, 618
         }
     }
