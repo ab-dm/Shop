@@ -2,7 +2,7 @@
 
 namespace Shop.Migrations
 {
-    public partial class addCategoryToDatabase : Migration
+    public partial class AddCategoryToDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
