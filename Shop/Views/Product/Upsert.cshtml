@@ -44,7 +44,7 @@
                         <label asp-for="Product.Discription"></label>
                     </div>
                     <div class="col-8">
-                        <input asp-for="Product.Discription" class="form-control" />
+                        <textarea asp-for="Product.Discription" class="form-control summernote"></textarea>
                         <span asp-validation-for="Product.Discription" class="text-danger"></span>
                     </div>
                 </div>
@@ -93,6 +93,9 @@
             </div>
             <div class="col-4">
                 @* Keep this empty *@
+                @if (Model.Product.Id != 0){
+                    <img src="@WC.ImagePath@Model.Product.Image" width="100%" style="border-radius:5px; border:1px solid #bbb" />
+                }
             </div>
         </div>
     </div>
@@ -101,7 +104,24 @@
 @section Scripts{
 
     @{
-        <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
     }
+    <script>
+        $(document).ready(function() {
+            $('.summernote').summernote();
+            height:250
+        });
 
+        function validateInput(){
+            if(document.getElementById("uploadBox").value == ""){
+                        Swal.fire(
+                        'Error!',
+                        'Please upload an Image!',
+                        'error'
+                        )
+                        return false;
+            }
+            return true;
+        }
+    </script>
 }
