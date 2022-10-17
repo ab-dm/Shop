@@ -107,7 +107,6 @@ namespace Shop.Controllers
                 else
                 {
                     //updating
-
                     var objFromDb = _db.Product.AsNoTracking().FirstOrDefault(u => u.Id == productVM.Product.Id);
 
                     if (files.Count > 0)
@@ -159,6 +158,9 @@ namespace Shop.Controllers
                 return NotFound();
             }
 
+            Product product = _db.Product.Include(u => u.Category).FirstOrDefault(u => u.Id == id);
+            // product.Category = _db.Category.Find(product.CategoryId);
+
             var obj = _db.Product.Find(id);
             if (obj == null)
             {
@@ -169,7 +171,7 @@ namespace Shop.Controllers
         }
 
         // POST - DELETE
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeletePost(int? id)
         {
@@ -180,8 +182,17 @@ namespace Shop.Controllers
                 return NotFound();
             }
 
+            string upload = _webHostEnvironment.WebRootPath + WC.ImagePath;
+            var oldFile = Path.Combine(upload, obj.Image);
+
+            if (System.IO.File.Exists(oldFile))
+            {
+                System.IO.File.Delete(oldFile);
+            }
+
             _db.Product.Remove(obj);
             _db.SaveChanges();
+
             return RedirectToAction("Index");
         }
     }
