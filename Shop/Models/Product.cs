@@ -11,6 +11,8 @@ namespace Shop.Models
         [Required]
         public string Name { get; set; }
 
+        public string ShortDesc { get; set; }
+
         public string Discription { get; set; }
 
         [Range(1, int.MaxValue)]
